@@ -5,7 +5,7 @@ using System.Threading.Channels;
 namespace Abstraction
 {
 
-    abstract class AbstractHadler
+    abstract class AbstractHandler
     {
         public abstract void Open();
         public abstract void Create();
@@ -13,7 +13,7 @@ namespace Abstraction
         public abstract void Save();
     }
 
-    class XMLHandler : AbstractHadler
+    class XMLHandler : AbstractHandler
     {
         public override void Open()
         {
@@ -33,7 +33,7 @@ namespace Abstraction
         }
     }
 
-    class TXTHadler : AbstractHadler
+    class TXTHandler : AbstractHandler
     {
         public override void Open()
         {
@@ -53,7 +53,7 @@ namespace Abstraction
         }
     }
 
-    class DOCHandler : AbstractHadler
+    class DOCHandler : AbstractHandler
     {
         public override void Open()
         {
@@ -84,6 +84,57 @@ namespace Abstraction
             Console.WriteLine("Вітаємо\n Виберіть яку версію документа ви хочте відкрити\n XML,TXT або DOC");
 
             string version = Console.ReadLine();
+
+            AbstractHandler abstracthadler;
+
+            if(version == "XML")
+            {
+                abstracthadler = new XMLHandler();
+            }
+            else if(version == "TXT")
+            {
+                abstracthadler = new TXTHandler();
+            }
+            else if (version == "DOC")
+            {
+                abstracthadler = new DOCHandler();
+            }
+            else
+            {
+                Console.WriteLine("Unknown");
+                return;
+            }
+
+            Console.WriteLine("Тепер виберіть що ви хочете зробити:");
+            Console.WriteLine("1 - Відкрити ");
+            Console.WriteLine("2 - Зробити");
+            Console.WriteLine("3 - Змінити");
+            Console.WriteLine("4 - Зберегти");
+
+            string choice = Console.ReadLine();
+
+            if(choice == "1")
+            {
+                abstracthadler.Open();
+            }
+            else if(choice == "2")
+            {
+                 abstracthadler.Create();
+            }
+            else if(choice == "3")
+            {
+                abstracthadler.Change();
+            }
+            else if(choice == "4")
+            {
+                abstracthadler.Save();
+            }
+            else
+            {
+                Console.WriteLine("Невідомимй вибір");
+            }
+
+            Console.WriteLine("Натисніть любу клавішу для виходу");
 
         }
     }
