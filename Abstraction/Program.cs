@@ -1,40 +1,90 @@
 ﻿using System;
+using System.Text;
 using System.Threading.Channels;
 
 namespace Abstraction
 {
-    class ConcretClassA
+
+    abstract class AbstractHadler
     {
-        public void Operation()
+        public abstract void Open();
+        public abstract void Create();
+        public abstract void Change();
+        public abstract void Save();
+    }
+
+    class XMLHandler : AbstractHadler
+    {
+        public override void Open()
         {
-            Console.WriteLine("Concrete class A");
+            Console.WriteLine("XML Document open");
+        }
+        public override void Create()
+        {
+            Console.WriteLine("XML Document create");
+        }
+        public override void Change()
+        {
+            Console.WriteLine("XML Document changed");
+        }
+        public override void Save()
+        {
+            Console.WriteLine("XML Document save");
         }
     }
 
-    abstract class AbstractClass : ConcretClassA
+    class TXTHadler : AbstractHadler
     {
-        public abstract void Method();
-    }
-
-    class ConcretClassB : AbstractClass
-    {
-        public override void Method()
+        public override void Open()
         {
-            Console.WriteLine("Concrete class B");
+            Console.WriteLine("TXT Document open");
+        }
+        public override void Create()
+        {
+            Console.WriteLine("TXT Document create");
+        }
+        public override void Change()
+        {
+            Console.WriteLine("TXT Document changed");
+        }
+        public override void Save()
+        {
+            Console.WriteLine("TXT Document save");
         }
     }
+
+    class DOCHandler : AbstractHadler
+    {
+        public override void Open()
+        {
+            Console.WriteLine("DOC Document open");
+        }
+        public override void Create()
+        {
+            Console.WriteLine("DOC Document create");
+        }
+        public override void Change()
+        {
+            Console.WriteLine("DOC Document changed");
+        }
+        public override void Save()
+        {
+            Console.WriteLine("DOC Document save");
+        }
+    }
+    
 
     internal class Program
     {
         static void Main(string[] args)
         {
-            AbstractClass instance = new ConcretClassB();
 
-            instance.Operation();
-            instance.Method();
+            Console.OutputEncoding = Encoding.Unicode;
 
+            Console.WriteLine("Вітаємо\n Виберіть яку версію документа ви хочте відкрити\n XML,TXT або DOC");
 
-            
+            string version = Console.ReadLine();
+
         }
     }
 }
