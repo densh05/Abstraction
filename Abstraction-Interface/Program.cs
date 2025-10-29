@@ -3,22 +3,22 @@ using System.Text;
 
 namespace Abstraction_Interface
 {
-    interface IPlayable
+    interface IPlayable // Створюємо інтерфейс
     {
-        void Play();
+        void Play(); //Створюємо абстрактні методи
         void Pause();
         void Stop();
 
     }
 
-    interface IRecodable
+    interface IRecodable //Створюємо другий інтерфейс
     {
-        void Record();
+        void Record(); //Створюємо абстрактні методи
         void Pause();
         void Stop();
     }
 
-    class Player : IPlayable, IRecodable
+    class Player : IPlayable, IRecodable //Створюємо класс,реалізовуємо інтерфейси
     {
          public void Play()
         {
@@ -34,7 +34,7 @@ namespace Abstraction_Interface
             Console.WriteLine("Запис закінчено");
         }
 
-        void IRecodable.Record()
+        void IRecodable.Record() //Робимо теїніку явної вказівки імені інтерфейсу
         {
             Console.WriteLine("Запис розпочато");
         }
@@ -61,11 +61,14 @@ namespace Abstraction_Interface
 
             Console.WriteLine("Вітаю,якщо ви хочете продивитись відео,натисніть - 1\nЯкщо хочете записати своє відео,натисніть - 2.");
 
-            string choice = Console.ReadLine();
+            string choice = Console.ReadLine(); //Стрінгова змінна 
 
-            if (choice == "1")
+            if (choice == "1") //If-Else 
             {
-                IPlayable playable = new Player();
+                //Змінна playable типу IPlayable,Так як класс Player спадкований від двох інтерфейсів
+                //Просимо щоб змінна pllayable вміла робити все,що в інтерфейсі IPlayable
+
+                IPlayable playable = new Player(); 
 
                 playable.Play();
                 playable.Pause();
